@@ -5,7 +5,7 @@ import sys
 # Configuración inicial
 SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 400
-GRID_SIZE = 4
+GRID_SIZE = 5
 TILE_SIZE = 80
 TILE_MARGIN = 10
 FONT_SIZE = 32
