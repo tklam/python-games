@@ -3,8 +3,8 @@ import random
 import sys
 
 # Configuración inicial
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 400
+SCREEN_WIDTH = 500
+SCREEN_HEIGHT = 500
 GRID_SIZE = 5
 TILE_SIZE = 80
 TILE_MARGIN = 10
@@ -30,6 +30,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("2048")
 font = pygame.font.Font(None, FONT_SIZE)
 
+
 # Clase del juego
 class Game2048:
     def __init__(self):
@@ -39,7 +40,9 @@ class Game2048:
         self.add_new_tile()
 
     def add_new_tile(self):
-        empty_cells = [(r, c) for r in range(GRID_SIZE) for c in range(GRID_SIZE) if self.grid[r][c] == 0]
+        empty_cells = [
+            (r, c) for r in range(GRID_SIZE) for c in range(GRID_SIZE) if self.grid[r][c] == 0
+        ]
         if empty_cells:
             r, c = random.choice(empty_cells)
             self.grid[r][c] = 4 if random.random() > 0.9 else 2
@@ -117,10 +120,17 @@ class Game2048:
             for c in range(GRID_SIZE):
                 value = self.grid[r][c]
                 color = TILE_COLORS.get(value, (60, 58, 50))
-                rect = pygame.Rect(c * (TILE_SIZE + TILE_MARGIN) + TILE_MARGIN, r * (TILE_SIZE + TILE_MARGIN) + TILE_MARGIN, TILE_SIZE, TILE_SIZE)
+                rect = pygame.Rect(
+                    c * (TILE_SIZE + TILE_MARGIN) + TILE_MARGIN,
+                    r * (TILE_SIZE + TILE_MARGIN) + TILE_MARGIN,
+                    TILE_SIZE,
+                    TILE_SIZE,
+                )
                 pygame.draw.rect(screen, color, rect)
                 if value != 0:
-                    text = font.render(str(value), True, (0, 0, 0) if value <= 4 else (255, 255, 255))
+                    text = font.render(
+                        str(value), True, (0, 0, 0) if value <= 4 else (255, 255, 255)
+                    )
                     text_rect = text.get_rect(center=rect.center)
                     screen.blit(text, text_rect)
 
@@ -129,6 +139,7 @@ class Game2048:
         self.score = 0
         self.add_new_tile()
         self.add_new_tile()
+
 
 def main():
     game = Game2048()
@@ -165,6 +176,7 @@ def main():
         game.draw()
         pygame.display.flip()
         clock.tick(30)
+
 
 if __name__ == "__main__":
     main()
